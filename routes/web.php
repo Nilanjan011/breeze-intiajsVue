@@ -39,7 +39,7 @@ Route::post('/from',[From::class, "submit"])->name('frompost');
 
 
 
-Route::post('/file',[From::class, "file"])->name('filepost');
 Route::get('/file',[From::class, "index"])->name('file');
+Route::post('/file',[From::class, "file"])->name('filepost');
 
 require __DIR__.'/auth.php';

@@ -1,13 +1,14 @@
 <template>
     <div>
-<Head title="From" />
-         <div class="container">
+        <Head title="From" />
+        <div class="container">
             <form @submit.prevent="submit">
                 <div class="mb-3">
+                    <h1 style="color:green;" v-if="msg">{{ msg }}</h1>
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                 <input type="email" v-model="form.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 <div style="color:red;" v-if="errors.email">{{ errors.email }}</div>
-                <h1 style="color:green;" v-if="d">{{ d }}</h1>
+                
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div class="mb-3">
@@ -27,22 +28,19 @@
                 </BreezeButton>
             </form>
         </div>
-        <!-- </BreezeAuthenticatedLayout> -->
     </div>
 </template>
 <script>
 
 import BreezeCheckbox from '@/Components/Checkbox.vue'
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { Head , Link} from '@inertiajs/inertia-vue3';
 import BreezeButton from '@/Components/Button.vue'
 export default {
      props: {
         errors: Object,
-        d:null
+        msg:Array,
     },
     components: {
-        BreezeAuthenticatedLayout,
         Head,
         Link,
         BreezeButton,
@@ -59,12 +57,16 @@ export default {
         }
     },
 
+    mounted() {
+        console.log(this.d);
+    },
+
     methods: {
         submit() {
             this.form.post(this.route('from'), {
                 onFinish: () => this.form.reset('password'),
             })
         }
-    }
+    },
 }
 </script>

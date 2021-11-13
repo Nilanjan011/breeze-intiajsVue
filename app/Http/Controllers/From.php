@@ -15,8 +15,10 @@ class From extends Controller
             'email' => ['required', 'max:50', 'email'],
         ]);
         // return Inertia::render('from'); // it's work properly
-        return redirect()->route('from'); // it's work properly
-        return Inertia::render('from',["d"=>"d"]);
+        // return redirect()->route('from'); // it's work properly
+        return Inertia::render('from',[
+            "msg"=>"validation successfully",
+        ]);// it's work properly
     }
 
     public function file(Request $request)
@@ -39,7 +41,13 @@ class From extends Controller
         
         if($f->save()){
 
-            return redirect()->route('file'); // it's work properly
+            // return redirect()->route('file'); // it's work properly
+            $file=File::select('file')->orderBy('id','DESC')->get();
+
+        return Inertia::render('file', [
+            'file' => $file,
+            'msg' => 'inserted successfully'
+        ]);
         }
     }
 
@@ -48,7 +56,7 @@ class From extends Controller
         $file=File::select('file')->orderBy('id','DESC')->get();
 
         return Inertia::render('file', [
-            'file' => $file
+            'file' => $file,
         ]);
     }
 

@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="submit" enctype="multipart/form-data">
     <!-- <input type="text" v-model="form.name" /> -->
+    <h1>{{msg}}</h1>
     <input type="file" @input="form.avatar = $event.target.files[0]" />
     <div style="color:red;" v-if="errors.file">{{ errors.file }}</div>
     <progress v-if="form.progress" :value="form.progress.percentage" max="100">
@@ -22,8 +23,9 @@ import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {
     props: {
-        errors: Object,
-        file: Object,
+      errors: Object,
+      file: Object,
+      msg: Array,
     },
     setup () {
         const form = useForm({
